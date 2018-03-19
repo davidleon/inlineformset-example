@@ -1,25 +1,24 @@
-from django.conf.urls import patterns, include
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 
+
 handler500 = 'utils.views.server_error'
 
-urlpatterns = patterns('')
+urlpatterns = []
 
 # Debug/Development URLs
 if settings.DEBUG is True:  # pragma: no cover
-    urlpatterns += patterns(
-        '',
-        (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    )
+    urlpatterns += [
+        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    ]
 
 # Admin Site
 admin.autodiscover()
 
 # Includes
-urlpatterns += patterns(
-    '',
-    (r'^admin/', include(admin.site.urls)),
-    (r'^grappelli/', include('grappelli.urls')),
-    (r'', include('books.urls')),
-)
+urlpatterns += [
+    url(r'^admin/', admin.site.urls),
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'', include('books.urls')),
+]
