@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-
+import debug_toolbar
 
 handler500 = 'utils.views.server_error'
 
@@ -21,4 +21,5 @@ urlpatterns += [
     url(r'^admin/', admin.site.urls),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'', include('books.urls')),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
